@@ -1,6 +1,6 @@
 As part of my DevOps self-training, I developed two scripts to make managing systems easier and more reliable:
 
-1. **Automated Database Backup**  
+1. **Automated Database Backup (backup_script.sh)** 
     - A bash script that automatically backs up your containerized database, encrypts the backups, and securely sends them to an email address of your choice giving you peaceful nights.
 
     **Features**  
@@ -38,6 +38,6 @@ As part of my DevOps self-training, I developed two scripts to make managing sys
 
     **NOTE:** Database backups may be large at times, ensure your recipient can handle large backups as this can fill quite fast if you have backups north of 200MB and also may incur costs on the email service provider.
 
-2. **Simple Application / Server Monitoring**  
+2. **Simple Application / Server Monitoring (app_uptime_script.sh)**  
    - Monitors an application or server instance (similar in concept to Google Analytics, but lightweight).  
    - Sends notifications whenever downtime or issues occur, allowing you to address problems before they impact users.
