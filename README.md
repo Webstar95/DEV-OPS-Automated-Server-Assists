@@ -26,13 +26,13 @@ As part of my DevOps self-training, I developed two scripts to make managing sys
 
     - Update the variables on the .env.demo file to your actual but keep this file out of GitHub with gitignore. 
         **Do not commit secrets!**
-    - Copy the two files on your prefered server path and ensure the bash script is executable by running;
+    - Copy the two files on your preferred server path and ensure the bash script is executable by running;
         - chmod +x {{file_name.sh}}
     - To run the backup, run the command;
         - bash {{file_name.sh}} -- This will trigger the process and will log the messages as it runs. 
-    - Once certain the process is successful, you can proceed to automate by impleementing a cron job to carry out the process within your convenience;
+    - Once certain the process is successful, you can proceed to automate by implementing a cron job to carry out the process within your convenience;
         1. run "crontab -e"
-        2. choose your prefered file editor
+        2. choose your preferred file editor
         3. Set cron job for example, midnight and append log file in case of faults;
             "0 0 * * * bash /path_to_file/{{file_name}}.sh >> /var/log/backup.log 2>&1" 
         4. Save the file and you should see the message; installing new crontab
@@ -43,3 +43,21 @@ As part of my DevOps self-training, I developed two scripts to make managing sys
 2. **Simple Application / Server Monitoring (app_uptime_script.sh)**  
    - Monitors an application or server instance (similar in concept to Google Analytics, but lightweight).  
    - Sends notifications whenever downtime or issues occur, allowing you to address problems before they impact users.
+
+   **Setting Up**
+    - Clone the repo from "https://github.com/Webstar95/DEV-OPS-Automated-Server-Assists.git"
+    - Ensure you have the auto-backup directory from the backup script set up above or you can simply create your own to store the uptime status check logs.
+    - Update the variables on the .env.demo file to your actual but keep this file out of GitHub with gitignore. 
+        **Do not commit secrets!**
+    - Copy the app_uptime_script.sh file onto your server path and ensure the bash script is executable by running;
+        - chmod +x {{file_name.sh}}
+    - To run the backup, run the command;
+        - bash {{file_name.sh}} -- This will trigger the process and will log the messages as it runs. 
+    - Implement a cron job to carry out the process within your convenience;
+        1. run "crontab -e"
+        2. choose your preferred file editor
+        3. Set cron job (recommended: every 5 minutes), and append log file in case of faults;
+            "*/5 * * * * //path_to_file/{{file_name}}.sh >> /var/log/backup.log 2>&1"
+        4. Save the file and you should see the message; installing new crontab
+    - You are now set.
+
