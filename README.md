@@ -33,7 +33,8 @@ As part of my DevOps self-training, I developed two scripts to make managing sys
     - Once certain the process is successful, you can proceed to automate by impleementing a cron job to carry out the process within your convenience;
         1. run "crontab -e"
         2. choose your prefered file editor
-        3. Set cron job for example, midnight --> "0 0 * * * sudo bash /path_to_file/{{file_name}}.sh" 
+        3. Set cron job for example, midnight and append log file in case of faults;
+            "0 0 * * * bash /path_to_file/{{file_name}}.sh >> /var/log/backup.log 2>&1" 
         4. Save the file and you should see the message; installing new crontab
     - You are now set.
 
