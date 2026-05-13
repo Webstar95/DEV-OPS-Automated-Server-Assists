@@ -45,7 +45,7 @@ MESSAGE="Backup initialized ..."
 upbeat_status=$(curl -s -o /dev/null -w "%{http_code}" $application_url)
 
 # Step 2. If the status code is 200, do nothing, else send email and SMS notifications
-if [ "$upbeat_status" -eq 200 ]; then
+if [[ "$upbeat_status" -ge 200 && "$upbeat_status" -lt 400 ]]; then # We will treat 200–399 as “OK”
    echo "URL is active" | tee -a "$log_file"
 else
 
