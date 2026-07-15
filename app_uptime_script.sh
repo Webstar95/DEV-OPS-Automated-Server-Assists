@@ -44,6 +44,18 @@ MESSAGE="Backup initialized ..."
 # Step 1. Check the status of the URL to the application
 upbeat_status=$(curl -s -o /dev/null -w "%{http_code}" $application_url)
 
+# Step 1.1 If Cloudflare or any other medium bypasses response or hinders challenge by blocking  - Use browser headers
+upbeat_status=$(curl -s -o /dev/null -w "%{http_code}" \
+  -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" \
+  -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" \
+  -H "Accept-Language: en-US,en;q=0.9" \
+  "$application_url")
+
+# Step 1.2 Bypass Cloudflare for health checks entirely
+upbeat_status=$(curl -s -o /dev/null -w "%{http_code}" \
+  --resolve "{{domain}}:443:{{actual_ORIGIN_IP}}" \
+  "https://{{domain}}")
+
 # Step 2. If the status code is 200, do nothing, else send email and SMS notifications
 if [[ "$upbeat_status" -ge 200 && "$upbeat_status" -lt 400 ]]; then # We will treat 200–399 as “OK”
    echo "URL is active" | tee -a "$log_file"
